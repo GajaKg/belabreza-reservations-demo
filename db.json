@@ -1,0 +1,81 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "name": "Soba #1",
+      "capacity": "4",
+      "periods": [
+        {
+          "id": 1,
+          "start": "Thu Dec 04 2024",
+          "end": "Tue Dec 09 2024",
+          "status": "confirmed",
+          "note": "Neka informacija"
+        },
+        {
+          "id": 2,
+          "start": "Thu Dec 11 2024",
+          "end": "Fri Dec 13 2024",
+          "status": "confirmed",
+          "note": "Neka informacija"
+        },
+        {
+          "id": 3,
+          "start": "Tue Dec 17 2024",
+          "end": "Wed Dec 25 2024",
+          "status": "awaiting",
+          "note": "Neka informacija"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Soba #2",
+      "capacity": "4",
+      "periods": [
+        {
+          "id": 1,
+          "start": "Sun Dec 01 2024",
+          "end": "Sun Dec 08 2024",
+          "status": "confirmed",
+          "note": "Neka informacija 12-01-2024"
+        },
+        {
+          "id": 2,
+          "start": "Fri Dec 13 2024",
+          "end": "Tue Dec 17 2024",
+          "status": "confirmed",
+          "note": "Neka informacija"
+        },
+        {
+          "id": 3,
+          "start": "Sun Dec 22 2024",
+          "end": "Mon Dec 30 2024",
+          "status": "awaiting",
+          "note": "Neka informacija"
+        },
+        {
+          "id": 4,
+          "start": "Tue Dec 17 2024",
+          "end": "Sun Dec 22 2024",
+          "status": "awaiting",
+          "note": "Neka informacija"
+        },
+        {
+          "id": 5,
+          "start": "Sun Dec 08 2024",
+          "end": "Fri Dec 13 2024",
+          "status": "disabled",
+          "note": "Neka informacija"
+        },
+        {
+          "id": 6,
+          "start": "Fri Nov 08 2024",
+          "end": "Wed Nov 13 2024",
+          "status": "disabled",
+          "note": "Neka informacija"
+        }
+      ]
+    }
+  ]
+}
