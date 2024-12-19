@@ -5,10 +5,10 @@ import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 
 import { ChangeEvent, FC, useState } from "react";
-import { Period, Room, Status } from "./Scheduler.interface";
+import { Period, Room, Status } from "../Scheduler.interface";
 
-import { useAppSelector, useAppDispatch } from "../../store/hooks";
-import { addPeriod } from "./store/schedulerSlice";
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import { addPeriod } from "../store/schedulerSlice";
 
 interface Props {
   room: Room;

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from "react";
 
-import { Period, Room } from "./Scheduler.interface";
-import { useAppSelector } from "../../store/hooks";
+import { Period, Room } from "../Scheduler.interface";
+import { useAppSelector } from "../../../store/hooks";
 import SchedulerRoomsCell from "./SchedulerRoomsCell";
 
 

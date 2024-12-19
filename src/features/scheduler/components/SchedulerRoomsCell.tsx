@@ -1,14 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Dialog } from "primereact/dialog";
 import { FC, useState } from "react";
-import { Period, Room } from "./Scheduler.interface";
+import { Period, Room } from "../Scheduler.interface";
 
 
-import DayIcon from "../../core/icons/DayIcon";
-import StartDayIcon from "../../core/icons/StartDayIcon";
-import EndDayIcon from "../../core/icons/EndDayIcon";
-import IntersectDayIcon from "../../core/icons/IntersectDayIcon";
+import DayIcon from "../../../core/icons/DayIcon";
+import StartDayIcon from "../../../core/icons/StartDayIcon";
+import EndDayIcon from "../../../core/icons/EndDayIcon";
+import IntersectDayIcon from "../../../core/icons/IntersectDayIcon";
 import SchedulerRoomsForm from "./SchedulerRoomsForm";
 
 interface Props {

@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import s from "./Scheduler.module.css";
 import { Calendar } from "primereact/calendar";
 import { days } from "../../mocks";
-import SchedulerRooms from "./SchedulerRooms";
+import SchedulerRooms from "./components/SchedulerRooms";
+import { useDispatch, useStore } from "react-redux";
+import { schedulerSlice } from "./store/schedulerSlice";
+import { fetchData } from "./store/scheduler-actions";
 
 const date = new Date();
 const fd = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -19,6 +22,7 @@ for (let d = 1; d < ld.getDate(); d++) {
 }
 
 const Scheduler: FC = () => {
+  const dispatch = useDispatch();
   const [lastDayFullDate, setLastDayFullDate] = useState(ld); // last day full date
   const lastDay = lastDayFullDate.getDate();
 
@@ -26,6 +30,10 @@ const Scheduler: FC = () => {
   const [daysNames, setDaysNames] = useState<string[]>(initDaysNames);
 
   const [selectedDate, setSelectedDate] = useState(date);
+
+  useEffect(() => {
+    dispatch(fetchData())
+  }, [dispatch])
 
   const onChangeDateHandler = (e: any) => {
     const newDate = new Date(e.value);
