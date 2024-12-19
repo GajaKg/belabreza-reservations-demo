@@ -5,9 +5,12 @@ export interface Room {
   periods: Period[];
 }
 
+export type Status = "confirmed" | "awaiting" | "disabled";
+
 export interface Period {
   id: number;
-  start: Date;
-  end: Date;
+  start: Date | string;
+  end: Date | string;
   status: "confirmed" | "awaiting" | "disabled";
+  note: string;
 }
