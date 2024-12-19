@@ -1,5 +1,7 @@
 import "./App.css";
+import 'primeicons/primeicons.css';
 import type { FC } from "react";
+
 import { SchedulerProvider } from "./features/scheduler/store/SchedulerProvider";
 import Scheduler from "./features/scheduler/Scheduler";
 import { Provider } from "react-redux";

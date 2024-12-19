@@ -16,7 +16,10 @@
   --rvg-date-status-reserved: #93f6a0;
   --rvg-date-status-renovation: #cec3fa;
 }
-
+.p-dialog-mask {
+  pointer-events: auto !important;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 .rvg-wrapper {
   width: 100%;
   position: relative;
