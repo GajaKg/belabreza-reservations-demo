@@ -8,7 +8,7 @@ export interface Room {
 export type Status = "confirmed" | "awaiting" | "disabled";
 
 export interface Period {
-  id: number;
+  id: number | string;
   start: Date | string;
   end: Date | string;
   status: "confirmed" | "awaiting" | "disabled";

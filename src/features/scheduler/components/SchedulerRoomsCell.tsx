@@ -14,7 +14,7 @@ interface Props {
   day: Date;
 }
 
-const SchedulerRoomsCell: FC<Props> = ({ room, periods, day }: Props) => {
+const SchedulerRoomsCell: FC<Props> = ({ room, periods = [], day }: Props) => {
   const [visible, setVisible] = useState(false);
 
   // const add = () => {
@@ -99,7 +99,8 @@ const SchedulerRoomsCell: FC<Props> = ({ room, periods, day }: Props) => {
         <div className="m-0">
           <SchedulerRoomsForm
             room={room}
-            periods={periods}
+            per={periods}
+            day={day}
             closeForm={() => {
               if (!visible) return;
               setVisible(false);

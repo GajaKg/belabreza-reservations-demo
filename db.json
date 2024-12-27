@@ -25,6 +25,20 @@
           "end": "Fri Dec 27 2024",
           "note": "Radi",
           "status": "disabled"
+        },
+        {
+          "id": ":r1:",
+          "start": "Sat Nov 09 2024",
+          "end": "Fri Nov 15 2024",
+          "note": "",
+          "status": "awaiting"
+        },
+        {
+          "id": ":r3:",
+          "start": "Tue Nov 19 2024",
+          "end": "Sat Nov 23 2024",
+          "note": "",
+          "status": "confirmed"
         }
       ]
     },
