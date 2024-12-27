@@ -22,9 +22,9 @@
         {
           "id": 3,
           "start": "Tue Dec 17 2024",
-          "end": "Wed Dec 25 2024",
-          "status": "awaiting",
-          "note": "Neka informacija"
+          "end": "Fri Dec 27 2024",
+          "note": "Radi",
+          "status": "disabled"
         }
       ]
     },
@@ -35,10 +35,10 @@
       "periods": [
         {
           "id": 1,
-          "start": "Sun Dec 01 2024",
+          "start": "Thu Nov 28 2024",
           "end": "Sun Dec 08 2024",
-          "status": "confirmed",
-          "note": "Neka informacija 12-01-2024"
+          "note": "test",
+          "status": "confirmed"
         },
         {
           "id": 2,
@@ -58,8 +58,8 @@
           "id": 4,
           "start": "Tue Dec 17 2024",
           "end": "Sun Dec 22 2024",
-          "status": "awaiting",
-          "note": "Neka informacija"
+          "note": "Neka informacija",
+          "status": "awaiting"
         },
         {
           "id": 5,

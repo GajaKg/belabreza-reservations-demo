@@ -20,10 +20,10 @@ export const schedulerSlice = createSlice({
   initialState,
   reducers: {
     initItems: (state, action: PayloadAction<any>) => {
+      console.log(action.payload)
       state.rooms = action.payload;
     },
     addPeriod: (state, action: PayloadAction<any>) => {
-      console.log(action.payload);
       state.rooms.push(action.payload);
     },
   },

@@ -4,15 +4,18 @@ import { Calendar } from "primereact/calendar";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 
-import { ChangeEvent, FC, useState } from "react";
-import { Period, Room, Status } from "../Scheduler.interface";
+import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
+import { Period, Room } from "../Scheduler.interface";
 
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
-import { addPeriod } from "../store/schedulerSlice";
+
+import { FormEvent } from "primereact/ts-helpers";
+import { editPeriod } from "../store/scheduler-actions";
 
 interface Props {
   room: Room;
   periods: Period[];
+  closeForm: ()=> void;
 }
 const roomStatus = [
   { name: "Potvrdjeno", code: "confirmed" },
@@ -25,32 +28,119 @@ const dropdownCodes: any = {
   disabled: { name: "Nedostupno", code: "disabled" },
 };
 
-const SchedulerRoomsForm: FC<Props> = ({ room, periods }: Props) => {
-  console.log(room, periods);
-
+const SchedulerRoomsForm: FC<Props> = ({ room, periods, closeForm }: Props) => {
+  console
+  const dispatch = useAppDispatch()
   const defaultDates: any = [];
   const defaultNotes: any = [];
   const defaultStatus: any = [];
   periods.forEach((period: Period) => {
     defaultDates.push({ start: period.start, end: period.end });
     defaultNotes.push(period.note);
-    defaultStatus.push(period.status);
+    // defaultStatus.push(period.status);
+    defaultStatus.push(dropdownCodes[period.status]);
   });
 
-  const [dates, setDates] = useState<any>(defaultDates);
+  const [isEdit, setIsEdit] = useState<boolean>(!!periods.length);
+  const [dates, setDates] = useState<any[]>(defaultDates);
   const [notes, setNotes] = useState<any>(defaultNotes);
   const [selectedRoomStatus, setSelectedRoomStatus] = useState(defaultStatus);
 
-  const submitReserevation = (e: ChangeEvent<HTMLFormElement>, index: number) => {
+  const submitReserevation = (
+    e: ChangeEvent<HTMLFormElement>,
+    index: number
+  ) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    const status = selectedRoomStatus[index]?.code;
 
-    console.log(formData, formData.get("note"+index), index);
-    // const startDate = target.startDate.value; // typechecks!
-    // const endDate = target.endDate.value; // typechecks!
-    // console.log(startDate, endDate);
-    // const content = formData.get("startDate");
-    // const button = formData.get("endDate");
+    // format dates ****************
+    const formDataStart = formData.get("dateStart" + index)!.toString();
+    const formDataEnd = formData.get("dateEnd" + index)!.toString();
+    const [dayStart, monthStart, yearStart] = formDataStart.split("/");
+    const [dayEnd, monthEnd, yearEnd] = formDataEnd.split("/");
+    // format dates ****************
+
+    if(!formDataStart || !formDataEnd || !status) {
+      alert("Neispravni podaci!")
+      return;
+    }
+    
+    const periodId: number | undefined = +periods[index].id || Math.floor(Math.random() * 500) + 23;
+    const dateStart = new Date(`${yearStart}-${monthStart}-${dayStart}`);
+    const dateEnd = new Date(`${yearEnd}-${monthEnd}-${dayEnd}`);
+    const note = formData.get("note" + index) ? formData.get("note" + index)!.toString() : "";
+    
+    const up: Period = {
+      id: periodId,
+      start: dateStart.toDateString(),
+      end: dateEnd.toDateString(),
+      note: note,
+      status: status,
+    };
+
+
+    if (isEdit) {
+      const copyRoom = {
+        ...room,
+        periods: [...room.periods]
+      }
+      const updatedPeriods: Period[] = room.periods.map((period: Period) => {
+        if (period.id === up.id) {
+          return up;
+        }
+        return period;
+      })
+      copyRoom.periods = updatedPeriods;
+
+      dispatch(editPeriod(copyRoom));
+      closeForm() // event emitter
+    }
+  };
+
+  const dateStartHandler = (
+    e: FormEvent<Date, SyntheticEvent<Element, Event>>,
+    index: number
+  ) => {
+    setDates((oldVal: any) => {
+      const updateDateStart = [...oldVal];
+      updateDateStart[index].start = e.target.value;
+      return updateDateStart;
+    });
+  };
+
+  const dateEndHandler = (
+    e: FormEvent<Date, SyntheticEvent<Element, Event>>,
+    index: number
+  ) => {
+    setDates((oldVal: any) => {
+      const updateDateEnd = [...oldVal];
+      updateDateEnd[index].end = e.target.value;
+      return updateDateEnd;
+    });
+  };
+
+  const roomStatusHandler = (
+    e: FormEvent<Date, SyntheticEvent<Element, Event>>,
+    index: number
+  ) => {
+    setSelectedRoomStatus((oldVal: any) => {
+      const updateStatus = [...oldVal];
+      updateStatus[index] = e.target.value;
+      return updateStatus;
+    });
+    
+  };
+
+  const noteHandler = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    setNotes((oldVal: any) => {
+      const updatedNotes = [...oldVal];
+      updatedNotes[index] = e.target.value;
+      return updatedNotes;
+    });
   };
 
   return (
@@ -59,7 +149,9 @@ const SchedulerRoomsForm: FC<Props> = ({ room, periods }: Props) => {
         {periods.map((period: Period, i: number) => {
           return (
             <form
-              onSubmit={(e: ChangeEvent<HTMLFormElement>) => submitReserevation(e, i)}
+              onSubmit={(e: ChangeEvent<HTMLFormElement>) =>
+                submitReserevation(e, i)
+              }
               className={`${i == 0 ? "mb-10" : ""} other-class`}
               key={i}
             >
@@ -68,6 +160,7 @@ const SchedulerRoomsForm: FC<Props> = ({ room, periods }: Props) => {
                   id={"dateStart" + i}
                   name={"dateStart" + i}
                   value={new Date(dates[i].start)}
+                  onChange={(e) => dateStartHandler(e, i)}
                   dateFormat="dd/mm/yy"
                   className="w-1/2"
                 />
@@ -76,6 +169,7 @@ const SchedulerRoomsForm: FC<Props> = ({ room, periods }: Props) => {
                   id={"dateEnd" + i}
                   name={"dateEnd" + i}
                   value={new Date(dates[i].end)}
+                  onChange={(e) => dateEndHandler(e, i)}
                   dateFormat="dd/mm/yy"
                   className="w-1/2"
                 />
@@ -84,8 +178,8 @@ const SchedulerRoomsForm: FC<Props> = ({ room, periods }: Props) => {
                 <Dropdown
                   id={"status" + i}
                   name={"status" + i}
-                  value={dropdownCodes[selectedRoomStatus[i]]}
-                  onChange={(e) => setSelectedRoomStatus(e.value)}
+                  value={selectedRoomStatus[i]}
+                  onChange={(e) => roomStatusHandler(e, i)}
                   options={roomStatus}
                   optionLabel="name"
                   placeholder="Status sobe"
@@ -95,10 +189,11 @@ const SchedulerRoomsForm: FC<Props> = ({ room, periods }: Props) => {
                   id={"note" + i}
                   name={"note" + i}
                   value={notes[i]}
-                  onChange={(e) => setNotes(e.target.value)}
+                  onChange={(e) => noteHandler(e, i)}
                   placeholder="Info."
                   className="w-1/2"
                 />
+ 
               </div>
               <button type="submit">Sačuvaj </button>
             </form>

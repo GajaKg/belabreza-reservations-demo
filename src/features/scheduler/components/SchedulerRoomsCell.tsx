@@ -2,7 +2,6 @@ import { Dialog } from "primereact/dialog";
 import { FC, useState } from "react";
 import { Period, Room } from "../Scheduler.interface";
 
-
 import DayIcon from "../../../core/icons/DayIcon";
 import StartDayIcon from "../../../core/icons/StartDayIcon";
 import EndDayIcon from "../../../core/icons/EndDayIcon";
@@ -74,8 +73,7 @@ const SchedulerRoomsCell: FC<Props> = ({ room, periods, day }: Props) => {
   );
   const displayValue = periods.length ? dayDisplayed : null;
 
-  const onClickCellHandler = (room: Room, period: Period[] | undefined) => {
-    console.log(room, period);
+  const onClickCellHandler = () => {
     setVisible(true);
     // useAppDispatch(addPeriod())
   };
@@ -84,7 +82,7 @@ const SchedulerRoomsCell: FC<Props> = ({ room, periods, day }: Props) => {
     <>
       <td
         className="rvg-cell"
-        onClick={() => onClickCellHandler(room, periods)}
+        onClick={onClickCellHandler}
       >
         {displayValue}
       </td>
@@ -102,6 +100,10 @@ const SchedulerRoomsCell: FC<Props> = ({ room, periods, day }: Props) => {
           <SchedulerRoomsForm
             room={room}
             periods={periods}
+            closeForm={() => {
+              if (!visible) return;
+              setVisible(false);
+            }}
           />
         </div>
       </Dialog>
