@@ -8,16 +8,17 @@ import SchedulerRoomsCell from "./SchedulerRoomsCell";
 
 interface Props {
   daysFullDate: Date[];
+  onRoomClicked: (room: Room) => void;
 }
 
-const SchedulerRooms: FC<Props> = ({ daysFullDate }: Props) => {
+const SchedulerRooms: FC<Props> = ({ daysFullDate, onRoomClicked }: Props) => {
   const rooms = useAppSelector((state: any) => state.scheduler.rooms);
 
   return (
     <>
       {rooms.map((room: Room, i: number) => (
         <tr key={i}>
-          <td className="rvg-title rvg-clickable rvg-fixed">{room.name}</td>
+          <td onClick={() => onRoomClicked(room)} className="rvg-title rvg-clickable rvg-fixed">{room.name}</td>
           <td className="rvg-info">{room.capacity}</td>
 
           {daysFullDate.map((day, i) => {

@@ -17,35 +17,6 @@ interface Props {
 const SchedulerRoomsCell: FC<Props> = ({ room, periods = [], day }: Props) => {
   const [visible, setVisible] = useState(false);
 
-  // const add = () => {
-  //   // dispatch(addPeriod(  {
-  //   //   id: 1,
-  //   //   name: "Soba #1",
-  //   //   capacity: "4",
-  //   //   periods: [
-  //   //     {
-  //   //       id: 1,
-  //   //       start: new Date("12-04-2024").toDateString(),
-  //   //       end: new Date("12-09-2024").toDateString(),
-  //   //       status: "confirmed",
-  //   //     },
-  //   //     {
-  //   //       id: 2,
-  //   //       start: new Date("12-11-2024").toDateString(),
-  //   //       end: new Date("12-13-2024").toDateString(),
-  //   //       status: "confirmed",
-  //   //     },
-  //   //     {
-  //   //       id: 3,
-  //   //       start: new Date("12-22-2024").toDateString(),
-  //   //       end: new Date("12-30-2024").toDateString(),
-  //   //       status: "awaiting",
-  //   //     },
-  //   //   ],
-  //   // },))
-  //   schedulerCtx.addPeriod();
-  // };
-
   let intersect,
     firstDay,
     lastDay = false;
@@ -71,17 +42,17 @@ const SchedulerRoomsCell: FC<Props> = ({ room, periods = [], day }: Props) => {
       {intersect && <IntersectDayIcon periods={periods} />}
     </div>
   );
+  
   const displayValue = periods.length ? dayDisplayed : null;
 
   const onClickCellHandler = () => {
     setVisible(true);
-    // useAppDispatch(addPeriod())
   };
 
   return (
     <>
       <td
-        className="rvg-cell"
+        className="rvg-cell cursor-pointer"
         onClick={onClickCellHandler}
       >
         {displayValue}

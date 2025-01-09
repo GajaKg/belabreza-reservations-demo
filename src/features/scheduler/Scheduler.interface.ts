@@ -1,7 +1,7 @@
 export interface Room {
-  id: number;
+  id: number | string;
   name: string;
-  capacity: string;
+  capacity: number;
   periods: Period[];
 }
 

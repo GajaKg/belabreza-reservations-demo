@@ -1,11 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import s from "./Scheduler.module.css";
 import { Calendar } from "primereact/calendar";
 import { days } from "../../mocks";
 import SchedulerRooms from "./components/SchedulerRooms";
 import { fetchData } from "./store/scheduler-actions";
 import { useAppDispatch } from "../../store/hooks";
+import SchedulerNewRoomForm from "./components/SchedulerNewRoomForm";
+import { Room } from "./Scheduler.interface";
+import { Card } from "primereact/card";
 
 const date = new Date();
 const fd = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -31,11 +34,14 @@ const Scheduler: FC = () => {
   const [daysNames, setDaysNames] = useState<string[]>(initDaysNames);
 
   const [selectedDate, setSelectedDate] = useState(date);
+  const [selectedRoom, setSelectedRoom] = useState<Room>();
 
-  if (!fetched) {
-    dispatch(fetchData());
-  }
-  fetched = true;
+  useEffect(() => {
+    if (!fetched) {
+      dispatch(fetchData());
+    }
+    fetched = true;
+  }, [dispatch]);
 
   const onChangeDateHandler = (e: any) => {
     const newDate = new Date(e.value);
@@ -56,16 +62,21 @@ const Scheduler: FC = () => {
   };
 
   return (
-    <>
-      {/* <button onClick={add}>ADD</button> */}
-      <Calendar
-        value={selectedDate}
-        onChange={onChangeDateHandler}
-        view="month"
-        dateFormat="mm/yy"
-      />
-
-      <div className={s.rvgWrapper} data-testid="grid-wrapper">
+    <Card>
+      <h2 className="text-4xl">Hotel 1</h2>
+      <div className="mb-10">
+        <SchedulerNewRoomForm room={selectedRoom} />
+      </div>
+      <div className="flex justify-center flex-col gap-6">
+        <div className="self-end">
+          <div className="text-right">Izaberi period:</div>
+          <Calendar
+            value={selectedDate}
+            onChange={onChangeDateHandler}
+            view="month"
+            dateFormat="mm/yy"
+          />
+        </div>
         <table className="rvg-table">
           <thead>
             <tr>
@@ -90,11 +101,14 @@ const Scheduler: FC = () => {
             </tr>
           </thead>
           <tbody>
-            <SchedulerRooms daysFullDate={daysFullDate} />
+            <SchedulerRooms
+              daysFullDate={daysFullDate}
+              onRoomClicked={(room: Room) => setSelectedRoom(room)}
+            />
           </tbody>
         </table>
       </div>
-    </>
+    </Card>
   );
 };
 

@@ -4,13 +4,14 @@ import { Calendar } from "primereact/calendar";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 
-import { ChangeEvent, FC, SyntheticEvent, useId, useState } from "react";
+import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
 import { Period, Room } from "../Scheduler.interface";
 
-import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch } from "../../../store/hooks";
 
 import { FormEvent } from "primereact/ts-helpers";
 import { addPeriod, editPeriod } from "../store/scheduler-actions";
+import { Button } from "primereact/button";
 
 interface Props {
   room: Room;
@@ -36,7 +37,7 @@ const SchedulerRoomsForm: FC<Props> = ({
   closeForm,
 }: Props) => {
   const isEdit = !!per.length;
-  const newId = useId();
+  // const newId = useId();
   const periods = [...per]; // copy of periods
   const dispatch = useAppDispatch();
   const defaultDates: any = [];
@@ -45,8 +46,8 @@ const SchedulerRoomsForm: FC<Props> = ({
 
   if (!periods.length) {
     periods.push({
-      // id: Math.floor(Math.random() * 500) + 23,
-      id: newId,
+      id: Math.floor(Math.random() * 500) + 23,
+      // id: newId,
       start: day,
       end: day,
       status: "confirmed",
@@ -85,9 +86,9 @@ const SchedulerRoomsForm: FC<Props> = ({
       return;
     }
 
-    // const periodId: number | undefined =
-    //   +periods[index].id || Math.floor(Math.random() * 500) + 23;
-    const periodId: number | undefined = +periods[index].id || newId;
+    const periodId: number | undefined =
+      +periods[index].id || Math.floor(Math.random() * 500) + 23;
+    // const periodId = +periods[index].id || newId;
     const dateStart = new Date(`${yearStart}-${monthStart}-${dayStart}`);
     const dateEnd = new Date(`${yearEnd}-${monthEnd}-${dayEnd}`);
     const note = formData.get("note" + index)
@@ -215,7 +216,7 @@ const SchedulerRoomsForm: FC<Props> = ({
                   className="w-1/2"
                 />
               </div>
-              <button type="submit">Sačuvaj </button>
+              <Button type="submit">Sačuvaj </Button>
             </form>
           );
         })}
