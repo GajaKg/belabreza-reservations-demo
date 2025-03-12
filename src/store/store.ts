@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import schedulerReducer from '../features/scheduler/store/schedulerSlice'
+import hotelsReducer from '../features/hotels/store/hotelsSlice'
 
 export const store = configureStore({
   reducer: {
-    scheduler: schedulerReducer
+    scheduler: schedulerReducer,
+    hotels: hotelsReducer
   },
 })
 

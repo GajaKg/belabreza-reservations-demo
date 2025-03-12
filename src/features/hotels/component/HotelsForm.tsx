@@ -1,59 +1,65 @@
-import { ChangeEvent, useState, type FC } from "react";
+import { ChangeEvent, useEffect, useState, type FC } from "react";
 
 import { InputText } from "primereact/inputtext";
-import { InputNumber } from "primereact/inputnumber";
 import { Button } from "primereact/button";
-import { useAppDispatch } from "../../../store/hooks";
 
-const HotelsForm: FC = () => {
-  const dispatch = useAppDispatch();
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
-  const [note, setNote] = useState<string>("");
+interface Props {
+  name?: string;
+  note?: string;
+  submitHotel: (name: string, note: string) => void;
+}
 
-  const submitHotel = (e: ChangeEvent<HTMLFormElement>) => {
+const HotelsForm: FC<Props> = (props: Props) => {
+  const [name, setName] = useState<string>(props.name || "");
+  const [note, setNote] = useState<string>(props.note || "");
+
+  useEffect(() => {
+    setName(props.name || "")
+    setNote(props.note || "")
+  }, [props.name, props.note])
+
+  const emitSubmitHotel = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name || !note) {
       alert("Popunite sva polja");
       return;
     }
 
-    if (isEdit) {
+    props.submitHotel(name, note);
 
-    } else {
+    // if (isEdit) {
 
-    }
+    // } else {
+
+    // }
 
 
   };
 
   const onCancelHandler = () => {
-    setIsEdit(false);
     setName("");
     setNote("");
   };
 
   return (
-    <>
-      <form onSubmit={(e: ChangeEvent<HTMLFormElement>) => submitHotel(e)}>
-        <div className="flex gap-2">
-          <InputText
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Naziv sobe"
-          />
-          <InputText
-            value={name}
-            onChange={(e) => setNote(e.target.value)}
-            placeholder="Naziv sobe"
-          />
-          <Button type="submit">Potvrdi</Button>
-          <Button onClick={onCancelHandler} severity="success">
-            Poništi
-          </Button>
-        </div>
-      </form>
-    </>
+    <form onSubmit={(e: ChangeEvent<HTMLFormElement>) => emitSubmitHotel(e)}>     
+      <div className="flex gap-2">
+        <InputText
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Naziv Hotela"
+        />
+        <InputText
+          value={note}
+          onChange={(e) => setNote(e.target.value)}
+          placeholder="info"
+        />
+        <Button type="submit">Potvrdi</Button>
+        <Button onClick={onCancelHandler} severity="success">
+          Poništi
+        </Button>
+      </div>
+    </form>
   );
 };
 

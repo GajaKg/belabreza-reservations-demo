@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Calendar } from "primereact/calendar";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
-
+import { Button } from "primereact/button";
 import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
+
 import { Period, Room } from "../Scheduler.interface";
 
-import { useAppDispatch } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 
 import { FormEvent } from "primereact/ts-helpers";
-import { addPeriod, editPeriod } from "../store/scheduler-actions";
-import { Button } from "primereact/button";
+import { editHotel } from "../../hotels/store/hotels-actions";
+import { setSelectedItems } from "../../hotels/store/hotelsSlice";
 
 interface Props {
   room: Room;
@@ -24,7 +24,7 @@ const roomStatus = [
   { name: "U čekanju", code: "awaiting" },
   { name: "Nedostupno", code: "disabled" },
 ];
-const dropdownCodes: any = {
+const dropdownCodes: Record<string, object> = {
   confirmed: { name: "Potvrdjeno", code: "confirmed" },
   awaiting: { name: "U čekanju", code: "awaiting" },
   disabled: { name: "Nedostupno", code: "disabled" },
@@ -36,10 +36,10 @@ const SchedulerRoomsForm: FC<Props> = ({
   day,
   closeForm,
 }: Props) => {
-  const isEdit = !!per.length;
-  // const newId = useId();
-  const periods = [...per]; // copy of periods
   const dispatch = useAppDispatch();
+  const activeHotel = useAppSelector(state => state.hotels.selectedItem);
+  const isEdit = !!per.length;
+  const periods = [...per]; // copy of periods
   const defaultDates: any = [];
   const defaultNotes: any = [];
   const defaultStatus: any = [];
@@ -116,11 +116,40 @@ const SchedulerRoomsForm: FC<Props> = ({
         return period;
       });
       copyRoom.periods = updatedPeriods;
-      dispatch(editPeriod(copyRoom));
+
+      if (activeHotel) {
+        const hotel = {
+          ...activeHotel,
+          rooms: activeHotel.rooms.map((room: Room) => {
+            if (+room.id === +copyRoom.id) {
+              return copyRoom;
+            }
+            return room
+          })
+        };
+  
+        dispatch(editHotel(hotel));
+        dispatch(setSelectedItems(hotel))
+      }
     } else {
       copyRoom.periods.push(up);
-      dispatch(addPeriod(copyRoom));
+      // dispatch(addPeriod(copyRoom));
+      if (activeHotel) {
+        const hotel = {
+          ...activeHotel,
+          rooms: activeHotel.rooms.map((room: Room) => {
+            if (+room.id === +copyRoom.id) {
+              return copyRoom;
+            }
+            return room
+          })
+        };
+  
+        dispatch(editHotel(hotel));
+        dispatch(setSelectedItems(hotel))
+      }
     }
+
     closeForm(); // event emitter
   };
 
@@ -168,7 +197,7 @@ const SchedulerRoomsForm: FC<Props> = ({
   return (
     <>
       <div>
-        {periods.map((period: Period, i: number) => {
+        {periods.map((_period: Period, i: number) => {
           return (
             <form
               onSubmit={(e: ChangeEvent<HTMLFormElement>) =>

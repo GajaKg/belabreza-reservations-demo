@@ -46,6 +46,27 @@
           "end": "Sun Jul 06 2025",
           "note": "",
           "status": "confirmed"
+        },
+        {
+          "id": 181,
+          "start": "Mon Jan 13 2025",
+          "end": "Tue Jan 14 2025",
+          "note": "",
+          "status": "confirmed"
+        },
+        {
+          "id": 23,
+          "start": "Tue Jan 14 2025",
+          "end": "Sat Jan 18 2025",
+          "note": "",
+          "status": "confirmed"
+        },
+        {
+          "id": 171,
+          "start": "Tue Feb 04 2025",
+          "end": "Sat Feb 08 2025",
+          "note": "asd asd asd as",
+          "status": "awaiting"
         }
       ]
     },
@@ -109,12 +130,19 @@
           "end": "Sat Dec 14 2024",
           "note": "",
           "status": "awaiting"
+        },
+        {
+          "id": 71,
+          "start": "Mon Nov 04 2024",
+          "end": "Sat Nov 09 2024",
+          "note": "",
+          "status": "confirmed"
         }
       ]
     },
     {
       "id": "475",
-      "name": "Soba #4",
+      "name": "Carski apartman",
       "capacity": 2,
       "periods": [
         {
@@ -123,12 +151,19 @@
           "end": "Mon Dec 23 2024",
           "note": "",
           "status": "confirmed"
+        },
+        {
+          "id": 447,
+          "start": "Wed Mar 12 2025",
+          "end": "Sat Mar 22 2025",
+          "note": "",
+          "status": "confirmed"
         }
       ]
     },
     {
       "id": "95",
-      "name": "Soba #5",
+      "name": "Soba #55",
       "capacity": 5,
       "periods": [
         {
@@ -153,13 +188,374 @@
           "status": "disabled"
         }
       ]
+    },
+    {
+      "id": "471",
+      "name": "Car",
+      "capacity": 3,
+      "periods": []
+    },
+    {
+      "id": "321",
+      "name": "asdasd ",
+      "capacity": 222,
+      "periods": []
+    },
+    {
+      "id": "75",
+      "name": "asdasd ",
+      "capacity": 22,
+      "periods": []
+    },
+    {
+      "id": "320",
+      "name": "asd asd",
+      "capacity": 222,
+      "periods": []
     }
   ],
   "hotels": [
     {
       "id": "1",
       "name": "Bela Breza",
-      "note": "Nek info"
+      "note": "Nek info o bb",
+      "rooms": [
+        {
+          "id": "1",
+          "name": "Soba #1",
+          "capacity": "4",
+          "periods": [
+            {
+              "id": 1,
+              "start": "Thu Dec 04 2024",
+              "end": "Tue Dec 09 2024",
+              "status": "confirmed",
+              "note": "Neka informacija"
+            },
+            {
+              "id": 2,
+              "start": "Thu Dec 11 2024",
+              "end": "Fri Dec 13 2024",
+              "status": "confirmed",
+              "note": "Neka informacija"
+            },
+            {
+              "id": 3,
+              "start": "Tue Dec 17 2024",
+              "end": "Fri Dec 27 2024",
+              "note": "Radi",
+              "status": "disabled"
+            },
+            {
+              "id": 4,
+              "start": "Sat Nov 09 2024",
+              "end": "Fri Nov 15 2024",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 5,
+              "start": "Tue Nov 19 2024",
+              "end": "Sat Nov 23 2024",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 348,
+              "start": "Sat Jul 05 2025",
+              "end": "Sun Jul 06 2025",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 181,
+              "start": "Mon Jan 13 2025",
+              "end": "Tue Jan 14 2025",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 23,
+              "start": "Tue Jan 14 2025",
+              "end": "Sat Jan 18 2025",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 171,
+              "start": "Tue Feb 04 2025",
+              "end": "Sat Feb 08 2025",
+              "note": "asd asd asd as",
+              "status": "awaiting"
+            },
+            {
+              "id": 453,
+              "start": "Tue Mar 04 2025",
+              "end": "Fri Mar 14 2025",
+              "note": "",
+              "status": "awaiting"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Soba #2",
+          "capacity": "4",
+          "periods": [
+            {
+              "id": 1,
+              "start": "Thu Nov 28 2024",
+              "end": "Sun Dec 08 2024",
+              "note": "test",
+              "status": "confirmed"
+            },
+            {
+              "id": 2,
+              "start": "Fri Dec 13 2024",
+              "end": "Tue Dec 17 2024",
+              "status": "confirmed",
+              "note": "Neka informacija"
+            },
+            {
+              "id": 3,
+              "start": "Sun Dec 22 2024",
+              "end": "Mon Dec 30 2024",
+              "status": "awaiting",
+              "note": "Neka informacija"
+            },
+            {
+              "id": 4,
+              "start": "Tue Dec 17 2024",
+              "end": "Sun Dec 22 2024",
+              "note": "Neka informacija",
+              "status": "awaiting"
+            },
+            {
+              "id": 5,
+              "start": "Sun Dec 08 2024",
+              "end": "Fri Dec 13 2024",
+              "status": "disabled",
+              "note": "Neka informacija"
+            },
+            {
+              "id": 6,
+              "start": "Fri Nov 08 2024",
+              "end": "Wed Nov 13 2024",
+              "note": "Neka informacija",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "name": "Soba #3",
+          "capacity": 3,
+          "periods": [
+            {
+              "id": 443,
+              "start": "Sat Dec 07 2024",
+              "end": "Sat Dec 14 2024",
+              "note": "",
+              "status": "awaiting"
+            },
+            {
+              "id": 71,
+              "start": "Mon Nov 04 2024",
+              "end": "Sat Nov 09 2024",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 291,
+              "start": "Fri Mar 07 2025",
+              "end": "Fri Mar 14 2025",
+              "note": "",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "id": "475",
+          "name": "Soba #4",
+          "capacity": 2,
+          "periods": [
+            {
+              "id": 385,
+              "start": "Thu Dec 19 2024",
+              "end": "Mon Dec 23 2024",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 203,
+              "start": "Sun Mar 16 2025",
+              "end": "Mon Mar 17 2025",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 505,
+              "start": "Wed Mar 26 2025",
+              "end": "Sat Mar 29 2025",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 362,
+              "start": "Sat Mar 08 2025",
+              "end": "Tue Mar 11 2025",
+              "note": "",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "id": "95",
+          "name": "Soba #5",
+          "capacity": 5,
+          "periods": [
+            {
+              "id": 45,
+              "start": "Sun Nov 03 2024",
+              "end": "Sat Nov 09 2024",
+              "note": "Menja se krevet",
+              "status": "disabled"
+            },
+            {
+              "id": 183,
+              "start": "Sun Feb 18 2024",
+              "end": "Thu Feb 29 2024",
+              "note": "test info",
+              "status": "confirmed"
+            },
+            {
+              "id": 205,
+              "start": "Wed Dec 04 2024",
+              "end": "Wed Dec 04 2024",
+              "note": "",
+              "status": "disabled"
+            },
+            {
+              "id": 206,
+              "start": "Sun Mar 09 2025",
+              "end": "Sat Mar 15 2025",
+              "note": "",
+              "status": "awaiting"
+            }
+          ]
+        },
+        {
+          "id": 471,
+          "name": "Soba #6",
+          "capacity": 3,
+          "periods": [
+            {
+              "id": 82,
+              "start": "Mon Mar 03 2025",
+              "end": "Sat Mar 15 2025",
+              "note": "",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "id": 1780,
+          "name": "Soba #7",
+          "capacity": 2,
+          "periods": [
+            {
+              "id": 364,
+              "start": "Sun Mar 16 2025",
+              "end": "Sat Mar 29 2025",
+              "note": "",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "id": 1480,
+          "name": "Soba #8",
+          "capacity": 3,
+          "periods": [
+            {
+              "id": 387,
+              "start": "Sat Mar 01 2025",
+              "end": "Sat Mar 08 2025",
+              "note": "",
+              "status": "awaiting"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Zelenika",
+      "note": "biser",
+      "rooms": [
+        {
+          "id": "475",
+          "name": "Carski apartman",
+          "capacity": 2,
+          "periods": [
+            {
+              "id": 385,
+              "start": "Thu Dec 19 2024",
+              "end": "Mon Dec 23 2024",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 181,
+              "start": "Sat Mar 08 2025",
+              "end": "Mon Mar 17 2025",
+              "note": "",
+              "status": "confirmed"
+            }
+          ]
+        },
+        {
+          "id": 4721,
+          "name": "Kraljevski apartman",
+          "capacity": 2,
+          "periods": [
+            {
+              "id": 366,
+              "start": "Tue Mar 11 2025",
+              "end": "Tue Mar 18 2025",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 343,
+              "start": "Fri Mar 21 2025",
+              "end": "Sat Mar 22 2025",
+              "note": "",
+              "status": "disabled"
+            }
+          ]
+        },
+        {
+          "id": 940,
+          "name": "Princ apartman",
+          "capacity": 3,
+          "periods": []
+        },
+        {
+          "id": 5022,
+          "name": "Carica",
+          "capacity": 1,
+          "periods": [
+            {
+              "id": 516,
+              "start": "Wed Mar 05 2025",
+              "end": "Fri Mar 14 2025",
+              "note": "",
+              "status": "awaiting"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

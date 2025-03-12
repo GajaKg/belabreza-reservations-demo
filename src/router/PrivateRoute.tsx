@@ -1,22 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Scheduler from "../features/scheduler/Scheduler";
-import Hotels from "../features/hotels/Hotels";
+import HotelsManage from "../features/hotels/pages/HotelsManage";
 import App from "../App";
+import HotelsList from "../features/hotels/pages/HotelsList";
+import HotelsListDetail from "../features/hotels/pages/HotelsListDetail";
+
+// export const fetchHotels = async () => {
+//   try {
+//     const response = await axios.get("http://localhost:3000/hotels");
+//     return response.data; // React Router will pass this to useLoaderData()
+//   } catch (error) {
+//     throw new Response("Failed to fetch hotels", { status: error.response?.status || 500 });
+//   }
+// };
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    // loader: fetchHotels,
     children: [
       {
         path: "",
-        element: <Scheduler></Scheduler>,
+        element: <HotelsManage></HotelsManage>,
       },
       {
         path: "/hotels",
-        element: <Hotels></Hotels>,
+        element: <HotelsList></HotelsList>,
+        children: [
+          { 
+            path: ":id", 
+            element: <HotelsListDetail></HotelsListDetail>
+          }
+        ]
       },
     ],
   },

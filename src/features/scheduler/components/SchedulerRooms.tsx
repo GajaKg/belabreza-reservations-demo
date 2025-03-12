@@ -12,11 +12,11 @@ interface Props {
 }
 
 const SchedulerRooms: FC<Props> = ({ daysFullDate, onRoomClicked }: Props) => {
-  const rooms = useAppSelector((state: any) => state.scheduler.rooms);
+  const hotel = useAppSelector((state: any) => state.hotels.selectedItem);
 
   return (
     <>
-      {rooms.map((room: Room, i: number) => (
+      {hotel && hotel.rooms && hotel.rooms.map((room: Room, i: number) => (
         <tr key={i}>
           <td onClick={() => onRoomClicked(room)} className="rvg-title rvg-clickable rvg-fixed">{room.name}</td>
           <td className="rvg-info">{room.capacity}</td>

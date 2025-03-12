@@ -3,24 +3,23 @@ import { ChangeEvent, useEffect, useState, type FC } from "react";
 import { InputText } from "primereact/inputtext";
 import { InputNumber } from "primereact/inputnumber";
 import { Button } from "primereact/button";
-import { useAppDispatch } from "../../../store/hooks";
-import { addRoom, editRoom } from "../store/scheduler-actions";
 import { Room } from "../Scheduler.interface";
 
 interface Props {
-  room: Room | undefined;
+  room?: Room;
+  isEdit?: boolean;
+  roomSubmited: (room: Room) => void;
+  // roomSubmited: (room: Record<string, string | number>) => void;
 }
 
-const SchedulerNewRoomForm: FC<Props> = ({ room }: Props) => {
-  const dispatch = useAppDispatch();
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
-  const [capacity, setCapacity] = useState<number>(0);
+const SchedulerNewRoomForm: FC<Props> = ({ room, isEdit=false, roomSubmited }: Props) => {
+  const [edit, setEdit] = useState<boolean>(isEdit || false);
+  const [name, setName] = useState<string>(room?.name || "");
+  const [capacity, setCapacity] = useState<number>(room?.capacity || 0);
 
   useEffect(() => {
     setName(room?.name || "");
     setCapacity(room?.capacity || 0);
-    setIsEdit(!!room);
   }, [room]);
 
   const submitRoom = (e: ChangeEvent<HTMLFormElement>) => {
@@ -29,39 +28,39 @@ const SchedulerNewRoomForm: FC<Props> = ({ room }: Props) => {
       alert("Popunite sva polja");
       return;
     }
-
-    if (isEdit) {
-      const eRoom: Room = {
-        id: room.id,
+    let roomSave: Room;
+    if (edit) {
+      roomSave = {
+        id: room!.id,
         name,
         capacity,
-        periods: [...room.periods],
+        periods: [...room!.periods],
       };
-      dispatch(editRoom(eRoom));
     } else {
-      const newRoom: Room = {
-        id: Math.floor(Math.random() * 500) + 23,
+      roomSave = {
+        id: Math.floor(Math.random() * 5000) + 23,
         name,
         capacity,
         periods: [],
       };
-      dispatch(addRoom(newRoom));
     }
 
+    roomSubmited(roomSave)
+
+    setEdit(false);
     setName("");
     setCapacity(0);
   };
 
   const onCancelHandler = () => {
-    setIsEdit(false);
     setName("");
     setCapacity(0);
+    setEdit(false);
   };
 
   return (
     <>
       <form onSubmit={(e: ChangeEvent<HTMLFormElement>) => submitRoom(e)}>
-        <p>{isEdit ? "Izmeni sobu" : "Dodaj sobu"}</p>
         <div className="flex gap-2">
           <InputText
             value={name}

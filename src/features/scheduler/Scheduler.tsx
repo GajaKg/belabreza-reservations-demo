@@ -1,12 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import s from "./Scheduler.module.css";
 import { Calendar } from "primereact/calendar";
 import { days } from "../../mocks";
 import SchedulerRooms from "./components/SchedulerRooms";
-import { fetchData } from "./store/scheduler-actions";
-import { useAppDispatch } from "../../store/hooks";
-import SchedulerNewRoomForm from "./components/SchedulerNewRoomForm";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { Room } from "./Scheduler.interface";
 import { Card } from "primereact/card";
 
@@ -23,10 +21,11 @@ for (let d = 1; d < ld.getDate(); d++) {
   daysFullDateInit.push(new Date(fd));
 }
 
-let fetched = false;
+// let fetched = false;
 
 const Scheduler: FC = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
+  const hotel = useAppSelector((state: any) => state.hotels.selectedItem);
   const [lastDayFullDate, setLastDayFullDate] = useState(ld); // last day full date
   const lastDay = lastDayFullDate.getDate();
 
@@ -36,12 +35,12 @@ const Scheduler: FC = () => {
   const [selectedDate, setSelectedDate] = useState(date);
   const [selectedRoom, setSelectedRoom] = useState<Room>();
 
-  useEffect(() => {
-    if (!fetched) {
-      dispatch(fetchData());
-    }
-    fetched = true;
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (!fetched) {
+  //     dispatch(fetchData());
+  //   }
+  //   fetched = true;
+  // }, [dispatch]);
 
   const onChangeDateHandler = (e: any) => {
     const newDate = new Date(e.value);
@@ -63,10 +62,7 @@ const Scheduler: FC = () => {
 
   return (
     <Card>
-      <h2 className="text-4xl">Hotel 1</h2>
-      <div className="mb-10">
-        <SchedulerNewRoomForm room={selectedRoom} />
-      </div>
+      <h2 className="text-4xl">{hotel?.name ?? ""}</h2>
       <div className="flex justify-center flex-col gap-6">
         <div className="self-end">
           <div className="text-right">Izaberi period:</div>
