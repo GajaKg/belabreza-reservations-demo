@@ -10,6 +10,7 @@ import HotelsForm from "../component/HotelsForm";
 import { Button } from "primereact/button";
 import { setEditItem } from "../store/hotelsSlice";
 import { Outlet, useNavigate } from "react-router";
+import { addHotel, deleteHotel } from "../store/hotels-actions";
 
 const HotelsList: FC = () => {
   const navigate = useNavigate();
@@ -32,10 +33,10 @@ const HotelsList: FC = () => {
   }
 
   const onSubmitHotelNew = (name: string, note: string) => {
-    console.log(name, note)
+    dispatch(addHotel({name, note} as Hotel))
   }
   const onDeleteHotel = (hotel: Hotel) => {
-    console.log(hotel)
+    dispatch(deleteHotel(hotel))
   }
   return (
     <>

@@ -7,6 +7,7 @@ import StartDayIcon from "../../../core/icons/StartDayIcon";
 import EndDayIcon from "../../../core/icons/EndDayIcon";
 import IntersectDayIcon from "../../../core/icons/IntersectDayIcon";
 import SchedulerRoomsForm from "./SchedulerRoomsForm";
+import { Tag } from "primereact/tag";
 
 interface Props {
   room: Room;
@@ -16,7 +17,6 @@ interface Props {
 
 const SchedulerRoomsCell: FC<Props> = ({ room, periods = [], day }: Props) => {
   const [visible, setVisible] = useState(false);
-
   let intersect,
     firstDay,
     lastDay = false;
@@ -24,25 +24,38 @@ const SchedulerRoomsCell: FC<Props> = ({ room, periods = [], day }: Props) => {
   if (periods.length >= 2) {
     intersect =
       new Date(periods[1]?.start).getTime() ==
-        new Date(periods[0]?.end).getTime() ||
+      new Date(periods[0]?.end).getTime() ||
       new Date(periods[1]?.end).getTime() ==
-        new Date(periods[0]?.start).getTime();
+      new Date(periods[0]?.start).getTime();
   } else {
     firstDay = new Date(day).getTime() == new Date(periods[0]?.start).getTime();
     lastDay = new Date(day).getTime() == new Date(periods[0]?.end).getTime();
   }
 
+
+  const paidTag = (
+    <span className="block absolute left-0 border-2">
+      {periods[0] && periods[0].paid ?
+        <Tag severity="success" ><i className="pi pi-dollar" style={{ fontSize: '10px' }}></i></Tag>
+        : <Tag severity="danger"><i className="pi pi-dollar" style={{ fontSize: '10px' }}></i></Tag>
+      }
+    </span>
+  )
+
   const dayDisplayed = (
-    <div className="day">
-      {firstDay && !intersect && <StartDayIcon status={periods[0]?.status} />}
+    <div className="day relative">
+      {firstDay && !intersect && <StartDayIcon status={periods[0]?.status} /> }
+      {firstDay && !intersect && paidTag }
       {!firstDay && !lastDay && !intersect && (
         <DayIcon status={periods[0]?.status} />
       )}
       {lastDay && !intersect && <EndDayIcon status={periods[0]?.status} />}
       {intersect && <IntersectDayIcon periods={periods} />}
+      {intersect && paidTag }
     </div>
   );
-  
+
+
   const displayValue = periods.length ? dayDisplayed : null;
 
   const onClickCellHandler = () => {
@@ -56,6 +69,8 @@ const SchedulerRoomsCell: FC<Props> = ({ room, periods = [], day }: Props) => {
         onClick={onClickCellHandler}
       >
         {displayValue}
+
+
       </td>
       <Dialog
         header={room.name}

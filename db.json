@@ -265,7 +265,14 @@
               "start": "Sat Jul 05 2025",
               "end": "Sun Jul 06 2025",
               "note": "",
-              "status": "confirmed"
+              "status": "confirmed",
+              "customer": {
+                "id": 4,
+                "name": "KK Radnicki Kragujevac",
+                "phone": "0636664556",
+                "email": "bcradnicki@test.com",
+                "paid": false
+              }
             },
             {
               "id": 181,
@@ -279,21 +286,49 @@
               "start": "Tue Jan 14 2025",
               "end": "Sat Jan 18 2025",
               "note": "",
-              "status": "confirmed"
+              "status": "confirmed",
+              "paid": false,
+              "customer": {
+                "id": 2,
+                "name": "OS Svetozar Markovic Rekovac",
+                "phone": "0636664556",
+                "email": "test@test.com"
+              }
             },
             {
               "id": 171,
               "start": "Tue Feb 04 2025",
               "end": "Sat Feb 08 2025",
               "note": "asd asd asd as",
-              "status": "awaiting"
+              "status": "awaiting",
+              "paid": true,
+              "customer": {
+                "id": 3,
+                "name": "Vatroozna",
+                "phone": "0636664556",
+                "email": "vatroozna@test.com"
+              }
             },
             {
               "id": 453,
               "start": "Tue Mar 04 2025",
               "end": "Fri Mar 14 2025",
               "note": "",
-              "status": "awaiting"
+              "status": "awaiting",
+              "paid": true,
+              "customer": {
+                "id": 1,
+                "name": "Milan Gajic",
+                "phone": "0636664556",
+                "email": "test@test.com"
+              }
+            },
+            {
+              "id": 33,
+              "start": "Sat Mar 01 2025",
+              "end": "Tue Mar 04 2025",
+              "note": "",
+              "status": "confirmed"
             }
           ]
         },
@@ -343,6 +378,13 @@
               "end": "Wed Nov 13 2024",
               "note": "Neka informacija",
               "status": "confirmed"
+            },
+            {
+              "id": 357,
+              "start": "Sat Mar 01 2025",
+              "end": "Mon Mar 31 2025",
+              "note": "",
+              "status": "disabled"
             }
           ]
         },
@@ -370,7 +412,8 @@
               "start": "Fri Mar 07 2025",
               "end": "Fri Mar 14 2025",
               "note": "",
-              "status": "confirmed"
+              "status": "confirmed",
+              "paid": true
             }
           ]
         },
@@ -391,7 +434,8 @@
               "start": "Sun Mar 16 2025",
               "end": "Mon Mar 17 2025",
               "note": "",
-              "status": "confirmed"
+              "status": "confirmed",
+              "paid": false
             },
             {
               "id": 505,
@@ -438,7 +482,14 @@
             {
               "id": 206,
               "start": "Sun Mar 09 2025",
-              "end": "Sat Mar 15 2025",
+              "end": "Sat Mar 22 2025",
+              "note": "",
+              "status": "confirmed"
+            },
+            {
+              "id": 76,
+              "start": "Wed Mar 05 2025",
+              "end": "Sun Mar 09 2025",
               "note": "",
               "status": "awaiting"
             }
@@ -454,7 +505,8 @@
               "start": "Mon Mar 03 2025",
               "end": "Sat Mar 15 2025",
               "note": "",
-              "status": "confirmed"
+              "status": "confirmed",
+              "paid": true
             }
           ]
         },
@@ -510,7 +562,14 @@
               "start": "Sat Mar 08 2025",
               "end": "Mon Mar 17 2025",
               "note": "",
-              "status": "confirmed"
+              "status": "confirmed",
+              "paid": true,
+              "customer": {
+                "id": 1,
+                "name": "Milan Gajic",
+                "phone": "0636664556",
+                "email": "test@test.com"
+              }
             }
           ]
         },
@@ -551,11 +610,28 @@
               "start": "Wed Mar 05 2025",
               "end": "Fri Mar 14 2025",
               "note": "",
-              "status": "awaiting"
+              "status": "awaiting",
+              "paid": false
+            },
+            {
+              "id": 147,
+              "start": "Fri Mar 14 2025",
+              "end": "Sat Mar 22 2025",
+              "note": "",
+              "status": "confirmed",
+              "paid": false
             }
           ]
         }
       ]
+    }
+  ],
+  "customers": [
+    {
+      "id": "1",
+      "name": "Milan Gajic",
+      "phone": "3654654",
+      "email": "test@test.com"
     }
   ]
 }

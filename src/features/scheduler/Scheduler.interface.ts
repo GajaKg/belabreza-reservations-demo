@@ -7,10 +7,18 @@ export interface Room {
 
 export type Status = "confirmed" | "awaiting" | "disabled";
 
+export interface Customer {
+  id: number | string;
+  name: string;
+  phone: string;
+  email: string;
+}
 export interface Period {
   id: number | string;
   start: Date | string;
   end: Date | string;
   status: "confirmed" | "awaiting" | "disabled";
   note: string;
+  paid: boolean;
+  customer?: Customer
 }

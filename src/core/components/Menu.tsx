@@ -1,20 +1,35 @@
 import type { FC } from "react";
 
 import { Menubar } from "primereact/menubar";
+import { useNavigate } from "react-router";
 
 const Menu: FC = () => {
+  const navigate = useNavigate();
   const items = [
     {
-      label: "Početna",
-      icon: "pi pi-home",
+      label: "Planer",
+      icon: "pi pi-calendar",
+      command: () => {
+        navigate('');
+    }
     },
     {
       label: "Hoteli",
-      icon: "pi pi-star",
+      icon: "pi pi-home",
+      command: () => {
+        navigate('/hotels');
+    }
+    },
+    {
+      label: "Korisnici",
+      icon: "pi pi-users",
+      command: () => {
+        navigate('/customers');
+    }
     },
     {
       label: "Statistika",
-      icon: "pi pi-envelope",
+      icon: "pi pi-graph",
     },
   ];
 

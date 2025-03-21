@@ -1,38 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createBrowserRouter } from "react-router-dom";
-import HotelsManage from "../features/hotels/pages/HotelsManage";
 import App from "../App";
-import HotelsList from "../features/hotels/pages/HotelsList";
-import HotelsListDetail from "../features/hotels/pages/HotelsListDetail";
+// import HotelsManage from "../features/hotels/pages/HotelsManage";
+// import HotelsList from "../features/hotels/pages/HotelsList";
+// import HotelsListDetail from "../features/hotels/pages/HotelsListDetail";
+// import Customers from "../features/customers/pages/Customers";
+import { lazy, Suspense } from "react";
 
-// export const fetchHotels = async () => {
-//   try {
-//     const response = await axios.get("http://localhost:3000/hotels");
-//     return response.data; // React Router will pass this to useLoaderData()
-//   } catch (error) {
-//     throw new Response("Failed to fetch hotels", { status: error.response?.status || 500 });
-//   }
-// };
-
+const HotelsManage = lazy(() => import('../features/hotels/pages/HotelsManage'));
+const HotelsList = lazy(() => import('../features/hotels/pages/HotelsList'));
+const HotelsListDetail = lazy(() => import('../features/hotels/pages/HotelsListDetail'));
+const Customers = lazy(() => import('../features/customers/pages/Customers'));
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <App />
+      </Suspense>
+    ),
     // loader: fetchHotels,
     children: [
       {
-        path: "",
-        element: <HotelsManage></HotelsManage>,
+        index: true,
+        element: <HotelsManage/>
       },
       {
         path: "/hotels",
-        element: <HotelsList></HotelsList>,
+        element: <HotelsList/>,
         children: [
-          { 
-            path: ":id", 
-            element: <HotelsListDetail></HotelsListDetail>
+          {
+            path: ":id",
+            element: <HotelsListDetail/>
           }
         ]
+      },
+      {
+        path: "customers",
+        element: <Customers/>,
       },
     ],
   },

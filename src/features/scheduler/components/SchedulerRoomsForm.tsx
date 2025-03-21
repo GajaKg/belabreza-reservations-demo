@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Calendar } from "primereact/calendar";
 import { Dropdown } from "primereact/dropdown";
+import { InputSwitch, InputSwitchChangeEvent } from "primereact/inputswitch";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { ChangeEvent, FC, SyntheticEvent, useState } from "react";
@@ -43,7 +44,8 @@ const SchedulerRoomsForm: FC<Props> = ({
   const defaultDates: any = [];
   const defaultNotes: any = [];
   const defaultStatus: any = [];
-
+  const defaultPaid: boolean[] = [];
+  // const [checked, setChecked] = useState(true);
   if (!periods.length) {
     periods.push({
       id: Math.floor(Math.random() * 500) + 23,
@@ -52,18 +54,21 @@ const SchedulerRoomsForm: FC<Props> = ({
       end: day,
       status: "confirmed",
       note: "",
+      paid: false,
     });
   }
 
   periods.forEach((period: Period) => {
     defaultDates.push({ start: period.start, end: period.end });
     defaultNotes.push(period.note);
+    defaultPaid.push(period.paid);
     // defaultStatus.push(period.status);
     defaultStatus.push(dropdownCodes[period.status]);
   });
 
   const [dates, setDates] = useState<any[]>(defaultDates);
   const [notes, setNotes] = useState<any>(defaultNotes);
+  const [paid, setPaid] = useState<any>(defaultPaid);
   const [selectedRoomStatus, setSelectedRoomStatus] = useState(defaultStatus);
 
   const submitReserevation = (
@@ -86,14 +91,15 @@ const SchedulerRoomsForm: FC<Props> = ({
       return;
     }
 
-    const periodId: number | undefined =
-      +periods[index].id || Math.floor(Math.random() * 500) + 23;
-    // const periodId = +periods[index].id || newId;
+    const periodId: number | undefined = +periods[index].id || Math.floor(Math.random() * 500) + 23;
     const dateStart = new Date(`${yearStart}-${monthStart}-${dayStart}`);
     const dateEnd = new Date(`${yearEnd}-${monthEnd}-${dayEnd}`);
     const note = formData.get("note" + index)
       ? formData.get("note" + index)!.toString()
       : "";
+    const paid = formData.get("paid" + index)
+      ? !!formData.get("paid" + index)
+      : false;
 
     const up: Period = {
       id: periodId,
@@ -101,6 +107,7 @@ const SchedulerRoomsForm: FC<Props> = ({
       end: dateEnd.toDateString(),
       note: note,
       status: status,
+      paid: paid,
     };
 
     const copyRoom = {
@@ -127,7 +134,7 @@ const SchedulerRoomsForm: FC<Props> = ({
             return room
           })
         };
-  
+
         dispatch(editHotel(hotel));
         dispatch(setSelectedItems(hotel))
       }
@@ -144,7 +151,7 @@ const SchedulerRoomsForm: FC<Props> = ({
             return room
           })
         };
-  
+
         dispatch(editHotel(hotel));
         dispatch(setSelectedItems(hotel))
       }
@@ -191,6 +198,13 @@ const SchedulerRoomsForm: FC<Props> = ({
       const updatedNotes = [...oldVal];
       updatedNotes[index] = e.target.value;
       return updatedNotes;
+    });
+  };
+  const paidHandler = (e: InputSwitchChangeEvent, index: number) => {
+    setPaid((oldVal: any) => {
+      const updatedPaid = [...oldVal];
+      updatedPaid[index] = e.target.value;
+      return updatedPaid;
     });
   };
 
@@ -244,6 +258,26 @@ const SchedulerRoomsForm: FC<Props> = ({
                   placeholder="Info."
                   className="w-1/2"
                 />
+              </div>
+              <div className="flex gap-5 mb-5">
+                {/* <Dropdown
+                  id={"status" + i}
+                  name={"status" + i}
+                  value={selectedRoomStatus[i]}
+                  onChange={(e) => roomStatusHandler(e, i)}
+                  options={roomStatus}
+                  optionLabel="name"
+                  placeholder="Status sobe"
+                  className="w-1/2 md:w-14rem"
+                /> */}
+                <div>
+                  <InputSwitch
+                    id={"paid" + i}
+                    name={"paid" + i}
+                    checked={paid[i]}
+                    onChange={(e) => paidHandler(e, i)}
+                    aria-label="Plaćeno" /> Plaćeno
+                </div>
               </div>
               <Button type="submit">Sačuvaj </Button>
             </form>

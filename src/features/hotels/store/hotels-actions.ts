@@ -8,7 +8,7 @@ export const fetchData = () => {
     try {
       const fetchedData = await hotelService.fetchHotels();
       console.log("fetchData ----->", fetchedData)
-      console.table(fetchedData)
+      // console.table(fetchedData)
       AppDispatch(initItems(fetchedData ?? []));
     } catch (e) {
       console.warn(e);
@@ -20,7 +20,7 @@ export const addHotel = (hotel: Hotel) => {
   return async (AppDispatch: AppDispatch) => {
     try {
       // await retrieveData();
-      hotelService.addHotel(hotel);
+      await hotelService.addHotel(hotel);
       await AppDispatch(fetchData());
       // alert("Uspešno dodat hotel");
     } catch (e) {
@@ -35,6 +35,20 @@ export const editHotel = (hotel: Hotel) => {
     try {
       // await retrieveData();
       await hotelService.editHotel(hotel);
+      await AppDispatch(fetchData());
+      // alert("Uspešno izmenjeni podaci o hotelu");
+    } catch (e) {
+      // console.warn(e)
+      console.warn(e);
+    }
+  };
+};
+
+export const deleteHotel = (hotel: Hotel) => {
+  return async (AppDispatch: AppDispatch) => {
+    try {
+      // await retrieveData();
+      await hotelService.deleteHotel(hotel);
       await AppDispatch(fetchData());
       // alert("Uspešno izmenjeni podaci o hotelu");
     } catch (e) {
