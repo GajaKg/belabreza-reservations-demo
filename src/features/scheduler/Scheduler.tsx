@@ -4,8 +4,8 @@ import s from "./Scheduler.module.css";
 import { Calendar } from "primereact/calendar";
 import { days } from "../../mocks";
 import SchedulerRooms from "./components/SchedulerRooms";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { Room } from "./Scheduler.interface";
+import { useAppSelector } from "../../store/hooks";
+// import { Room } from "./Scheduler.interface";
 import { Card } from "primereact/card";
 
 const date = new Date();
@@ -33,14 +33,7 @@ const Scheduler: FC = () => {
   const [daysNames, setDaysNames] = useState<string[]>(initDaysNames);
 
   const [selectedDate, setSelectedDate] = useState(date);
-  const [selectedRoom, setSelectedRoom] = useState<Room>();
-
-  // useEffect(() => {
-  //   if (!fetched) {
-  //     dispatch(fetchData());
-  //   }
-  //   fetched = true;
-  // }, [dispatch]);
+  // const [selectedRoom, setSelectedRoom] = useState<Room>();
 
   const onChangeDateHandler = (e: any) => {
     const newDate = new Date(e.value);
@@ -99,7 +92,7 @@ const Scheduler: FC = () => {
           <tbody>
             <SchedulerRooms
               daysFullDate={daysFullDate}
-              onRoomClicked={(room: Room) => setSelectedRoom(room)}
+              onRoomClicked={() => null}
             />
           </tbody>
         </table>

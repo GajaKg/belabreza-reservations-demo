@@ -2,6 +2,7 @@ import { AppDispatch } from "../../../store/store";
 import { initItems } from "./hotelsSlice";
 import { Hotel } from "../Hotels.interface";
 import { hotelService } from "../services/Hotel.service";
+// import { toast } from 'react-toastify';
 
 export const fetchData = () => {
   return async (AppDispatch: AppDispatch) => {

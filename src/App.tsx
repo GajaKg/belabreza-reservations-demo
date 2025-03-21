@@ -7,6 +7,7 @@ import { Outlet } from "react-router";
 import { useAppDispatch } from "./store/hooks";
 import { fetchData } from "./features/hotels/store/hotels-actions";
 import { fetchCustomers } from "./features/customers/store/customers-actions";
+import { ToastContainer } from "react-toastify";
 
 
 const App: FC = () => {
@@ -25,7 +26,19 @@ const App: FC = () => {
   return (
     <>
       <Menu />
-      <Outlet/>
+      <Outlet />
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };

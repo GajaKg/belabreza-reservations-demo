@@ -1,15 +1,15 @@
 import { Card } from "primereact/card";
-import { FC, useState } from "react";
+import { FC, lazy, Suspense, useState } from "react";
 
 import { Accordion, AccordionTab } from 'primereact/accordion';
 import { DataTable, DataTableValue } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-import TitleCard from "../../../shared/TitleCard";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import Scheduler from "../../scheduler/Scheduler";
 import { Hotel } from "../Hotels.interface";
 import { setSelectedItems } from "../store/hotelsSlice";
+import TitleCard from "../../../shared/TitleCard";
+const Scheduler = lazy(() => import("../../scheduler/Scheduler"));
 
 const Hotels: FC = () => {
   const dispatch = useAppDispatch();
@@ -38,9 +38,9 @@ const Hotels: FC = () => {
           </DataTable>
         </AccordionTab>
       </Accordion>
-      {/* <h4>Dodaj hotel</h4>
-      <HotelsForm/> */}
-      {selectedHotel && <Scheduler></Scheduler>}
+      <Suspense fallback="Loading...">
+        {selectedHotel && <Scheduler></Scheduler>}
+      </Suspense>
     </Card>
   );
 };

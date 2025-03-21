@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-
+import { toast } from 'react-toastify';
 export class Http {
     protected readonly axios = axios;
     protected controller: AbortController | null = null;
@@ -24,14 +24,15 @@ export class Http {
         } catch (error) {
             if (this.axios.isCancel(error)) {
                 console.warn("Request canceled:", error.message);
+                // toast.error(error.message);
             } else if ((error as AxiosError).isAxiosError) {
                 const axiosError = error as AxiosError;
-                console.error('Axios error:', axiosError.message);
-                throw new Error("Axios error: " + axiosError.message);
-                // return axiosError;
+                console.error('Axios error:', axiosError);
+                toast.error(axiosError.message);
+                // throw new Error("Axios error: " + axiosError.message);
             } else {
                 console.error('Unexpected error:', error);
-                // return error as Error;
+                toast.error('Unable to fetch data. Please try again later.');
             }
         }
     }
@@ -47,7 +48,7 @@ export class Http {
             const response: AxiosResponse = await this.connect.post(url, payload, {
                 signal: this.controller.signal,
             });
-
+            toast.success("Uspešno!")
             return response.data;
 
         } catch (error) {
@@ -56,11 +57,10 @@ export class Http {
             } else if ((error as AxiosError).isAxiosError) {
                 const axiosError = error as AxiosError;
                 console.error('Axios error:', axiosError.message);
-                throw new Error("Axios error: " + axiosError.message);
-                // return axiosError;
+                toast.error("Neuspešno, probajte kasnije!")
             } else {
                 console.error('Unexpected error:', error);
-                // return error as Error;
+                toast.error("Neuspešno, probajte kasnije!")
             }
         }
     }
@@ -86,10 +86,8 @@ export class Http {
                 const axiosError = error as AxiosError;
                 console.error('Axios error:', axiosError.message);
                 throw new Error("Axios error: " + axiosError.message);
-                // return axiosError;
             } else {
                 console.error('Unexpected error:', error);
-                // return error as Error;
             }
         }
     }
@@ -105,7 +103,7 @@ export class Http {
             const response: AxiosResponse = await this.connect.delete(url, {
                 signal: this.controller.signal,
             });
-
+            toast.success("Uspešno obrisano!")
             return response.data;
 
         } catch (error) {
@@ -114,11 +112,11 @@ export class Http {
             } else if ((error as AxiosError).isAxiosError) {
                 const axiosError = error as AxiosError;
                 console.error('Axios error:', axiosError.message);
-                throw new Error("Axios error: " + axiosError.message);
-                // return axiosError;
+                toast.error("Neuspešno, probajte kasnije!")
+                // throw new Error("Axios error: " + axiosError.message);
             } else {
                 console.error('Unexpected error:', error);
-                // return error as Error;
+                toast.error("Neuspešno, probajte kasnije!")
             }
         }
     }
