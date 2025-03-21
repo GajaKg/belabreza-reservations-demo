@@ -1,6 +1,7 @@
 import { AppDispatch } from "../../../store/store";
 import { initCustomers } from "./customersSlice";
 import { customerService } from "../services/Customer.service";
+import { Customer } from "../models/Customer.interface";
 
 export const fetchCustomers = () => {
   return async (AppDispatch: AppDispatch) => {
@@ -14,86 +15,42 @@ export const fetchCustomers = () => {
   };
 };
 
-// export const editPeriod = (room: Room) => {
-//   return async (AppDispatch: AppDispatch) => {
-//     const retrieveData = async () => {
-//       const response = await axios.put(
-//         `http://localhost:3000/rooms/${room.id}`,
-//         room
-//       );
-//       await response.data.room;
-//     };
+export const addCustomer = (customer: Customer) => {
+  return async (AppDispatch: AppDispatch) => {
+    try {
+      const response = await customerService.addCustomer(customer);
+      if (response) {
+        await AppDispatch(fetchCustomers());
+      }
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+};
 
-//     try {
-//       await retrieveData();
-//       await AppDispatch(fetchData());
-//       alert("Uspešno izmenjen period");
-//     } catch (e) {
-//       alert("Neuspešno");
-//       console.warn(e);
-//     }
-//   };
-// };
+export const editHotel = (customer: Customer) => {
+  return async (AppDispatch: AppDispatch) => {
+    try {
+      // await retrieveData();
+      await customerService.editCustomer(customer);
+      await AppDispatch(fetchCustomers());
+      // alert("Uspešno izmenjeni podaci o hotelu");
+    } catch (e) {
+      // console.warn(e)
+      console.warn(e);
+    }
+  };
+};
 
-// export const addPeriod = (room: Room) => {
-//   return async (AppDispatch: AppDispatch) => {
-//     const retrieveData = async () => {
-//       const response = await axios.put(
-//         `http://localhost:3000/rooms/${room.id}`,
-//         room
-//       );
-//       await response.data.room;
-//     };
-
-//     try {
-//       await retrieveData();
-//       await AppDispatch(fetchData());
-//       alert("Uspešno dodat period");
-//     } catch (e) {
-//       alert("Neuspešno");
-//       console.warn(e);
-//     }
-//   };
-// };
-
-// export const addRoom = (room: Room) => {
-//   return async (AppDispatch: AppDispatch) => {
-//     const retrieveData = async () => {
-//       const response = await axios.post(
-//         `http://localhost:3000/rooms`,
-//         room
-//       );
-//       await response.data.room;
-//     };
-
-//     try {
-//       await retrieveData();
-//       await AppDispatch(fetchData());
-//       alert("Uspešno dodata soba");
-//     } catch (e) {
-//       alert("Neuspešno");
-//       console.warn(e);
-//     }
-//   };
-// };
-
-// export const editRoom = (room: Room) => {
-//   return async (AppDispatch: AppDispatch) => {
-//     const retrieveData = async () => {
-//       const response = await axios.put(
-//         `http://localhost:3000/rooms/${room.id}`,
-//         room
-//       );
-//       await response.data.room;
-//     };
-
-//     try {
-//       await retrieveData();
-//       await AppDispatch(fetchData());
-//       alert("Uspešno dodata soba");
-//     } catch (e) {
-//       alert("Neuspešno");
-//       console.warn(e);
-//     }
-//   };
-// };
+export const deleteHotel = (customer: Customer) => {
+  return async (AppDispatch: AppDispatch) => {
+    try {
+      const response = await customerService.deleteCustomer(customer);
+      if (response) {
+        await AppDispatch(fetchCustomers());
+      }
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+};

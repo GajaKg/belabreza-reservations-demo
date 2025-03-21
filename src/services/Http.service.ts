@@ -48,7 +48,7 @@ export class Http {
             const response: AxiosResponse = await this.connect.post(url, payload, {
                 signal: this.controller.signal,
             });
-            toast.success("Uspešno!")
+            toast.success("Uspešno dodato!")
             return response.data;
 
         } catch (error) {
@@ -76,7 +76,7 @@ export class Http {
             const response: AxiosResponse = await this.connect.put(url, payload, {
                 signal: this.controller.signal,
             });
-
+            toast.success("Uspešno izmenjeno!")
             return response.data;
 
         } catch (error) {
@@ -85,9 +85,10 @@ export class Http {
             } else if ((error as AxiosError).isAxiosError) {
                 const axiosError = error as AxiosError;
                 console.error('Axios error:', axiosError.message);
-                throw new Error("Axios error: " + axiosError.message);
+                toast.error("Neuspešno, probajte kasnije!")
             } else {
                 console.error('Unexpected error:', error);
+                toast.error("Neuspešno, probajte kasnije!")
             }
         }
     }
