@@ -6,6 +6,7 @@ import Menu from "./core/components/Menu";
 import { Outlet } from "react-router";
 import { useAppDispatch } from "./store/hooks";
 import { fetchData } from "./features/hotels/store/hotels-actions";
+import { fetchCustomers } from "./features/customers/store/customers-actions";
 
 
 const App: FC = () => {
@@ -16,6 +17,7 @@ const App: FC = () => {
   useEffect(() => {
     if (!isFetched) {
       dispatch(fetchData());
+      dispatch(fetchCustomers());
       setIsFetched(true);
     }
   }, [isFetched, dispatch])
